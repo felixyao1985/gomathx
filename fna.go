@@ -59,7 +59,7 @@ func (s *Fractional) offset() {
 	if s.Denominator < s.Molecule {
 		m := s.Molecule % s.Denominator
 		s.Number = s.Number + (s.Molecule-m)/s.Denominator
-		s.Molecule = s.Molecule - m
+		s.Molecule = m
 	}
 
 	if s.Denominator == s.Molecule {
@@ -88,7 +88,7 @@ func (s *Fractional) Add(n, m, d int64) *Fractional {
 	s.ass(f)
 
 	s.Number += f.Number
-	s.Denominator += f.Denominator
+	s.Molecule += f.Molecule
 
 	s.offset()
 	return s
@@ -109,7 +109,7 @@ func (s *Fractional) Sub(n, m, d int64) *Fractional {
 	f.Molecule = f.Molecule + f.Number*f.Denominator
 	f.Number = 0
 
-	s.Denominator -= f.Denominator
+	s.Molecule -= f.Molecule
 
 	s.offset()
 	return s
