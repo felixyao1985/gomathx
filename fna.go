@@ -56,20 +56,21 @@ func (s *Fractional) offset() {
 		return
 	}
 
-	if s.Denominator > s.Molecule {
-		return
+	if s.Denominator < s.Molecule {
+		m := s.Molecule % s.Denominator
+		s.Number = s.Number + (s.Molecule-m)/s.Denominator
+		s.Molecule = s.Molecule - m
 	}
 
 	if s.Denominator == s.Molecule {
 		s.Number++
+		s.Molecule = 0
+		s.Denominator = 0
 		return
 	}
 
-	m := s.Molecule % s.Denominator
-	s.Number = s.Number + (s.Molecule-m)/s.Denominator
-	s.Molecule = s.Molecule - m
-
 	gcd := GCD(s.Molecule, s.Denominator)
+
 	s.Molecule /= gcd
 	s.Denominator /= gcd
 
