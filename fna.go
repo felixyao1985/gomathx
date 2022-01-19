@@ -114,3 +114,44 @@ func (s *Fractional) Sub(n, m, d int64) *Fractional {
 	s.offset()
 	return s
 }
+
+// Multiplication
+func (s *Fractional) Mul(n, m, d int64) *Fractional {
+	f := &Fractional{
+		Number:      n,
+		Molecule:    m,
+		Denominator: d,
+	}
+
+	s.Number *= f.Number
+	s.Molecule *= f.Molecule
+	s.Denominator *= f.Denominator
+
+	s.offset()
+	return s
+}
+
+// Division
+func (s *Fractional) Div(n, m, d int64) *Fractional { // 除法
+	f := &Fractional{
+		Number:      n,
+		Molecule:    m,
+		Denominator: d,
+	}
+
+	if s.Denominator == 0 {
+		s.Denominator = 1
+	}
+	if f.Denominator == 0 {
+		f.Denominator = 1
+	}
+
+	s.Molecule = s.Molecule + s.Number*s.Denominator
+	s.Number = 0
+	f.Molecule = f.Molecule + f.Number*f.Denominator
+	f.Number = 0
+
+	s.Mul(f.Number, f.Denominator, f.Molecule)
+
+	return s
+}
