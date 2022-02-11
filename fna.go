@@ -62,6 +62,18 @@ func (s *Fractional) offset() {
 		return
 	}
 
+	if s.Denominator == 1 {
+		if s.Number == 0 {
+			s.Number = s.Molecule
+		} else {
+			s.Number = s.Number + s.Molecule*s.Number/s.Number
+		}
+		s.Denominator = 0
+		s.Molecule = 0
+
+		return
+	}
+
 	if s.Denominator < s.Molecule {
 		m := s.Molecule % s.Denominator
 		s.Number = s.Number + (s.Molecule-m)/s.Denominator
