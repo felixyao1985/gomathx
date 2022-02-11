@@ -32,6 +32,13 @@ func TestSub2(t *testing.T) {
 	t.Skipped()
 }
 
+func TestSub3(t *testing.T) {
+	f := New(2, 0, 0)
+	f.Sub(1, 0, 0)
+	t.Log(f)
+	t.Skipped()
+}
+
 func TestGCD(t *testing.T) {
 	gcd := GCD(5, 40)
 	t.Log(gcd)

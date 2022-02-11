@@ -17,6 +17,12 @@ func New(n, m, d int64) *Fractional {
 //同化分子分母
 func (s *Fractional) ass(f *Fractional) {
 	if s.Denominator == f.Denominator {
+		s.Denominator = 1
+		f.Denominator = 1
+		s.Molecule = s.Number
+		f.Molecule = f.Number
+		s.Number = 0
+		f.Number = 0
 		return
 	}
 
@@ -128,6 +134,7 @@ func (s *Fractional) Mul(n, m, d int64) *Fractional {
 	s.Denominator *= f.Denominator
 
 	s.offset()
+
 	return s
 }
 
