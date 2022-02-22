@@ -1,7 +1,5 @@
 package gomathx
 
-import "fmt"
-
 type Fractional struct {
 	Number      int64
 	Molecule    int64
@@ -108,7 +106,7 @@ func (s *Fractional) Add(n, m, d int64) *Fractional {
 		Denominator: d,
 	}
 	s.ass(f)
-	fmt.Println(s, f)
+
 	s.Number += f.Number
 	s.Molecule += f.Molecule
 
